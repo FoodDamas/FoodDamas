@@ -7,14 +7,15 @@
 <mapper namespace="com.food.mapper.StatementMapper">
 	<!-- <select id="location" resultType="org.food.domain.SalesVO"> -->
 	<select id="location" resultType="hashmap">
-		select location, lat, lng,
-		sum(total_price) total_price
-		from
-		(select * from tbl_ft_sales where
-		u_id=#{u_id}) as sales
-		inner join
-		tbl_ft_order as orders on sales.sno =
-		orders.sno group by sales.location
+		select   location, lat, lng, sum(total_price) total_price from 
+(
+select location, sales.lat, sales.lng, sales_state, u_id, sales.sno, ono, total_price from
+(
+select location, lat, lng, sales_state, u_id, sno from tbl_ft_sales where u_id = #{u_id}
+) as sales
+inner join tbl_ft_order as orders on sales.sno = orders.sno
+) as b
+group by location
 	</select>
 
 	<select id="day" resultType="hashmap">
