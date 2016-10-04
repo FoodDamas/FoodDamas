@@ -733,8 +733,8 @@ html, body {
 										+ "<td class='vac' data-target='#myModalU' data-name='"+list[i].m_name+"' data-info='"+list[i].m_info+"' data-price='"+list[i].m_price+"' data-img='"+list[i].m_img+"' data-mnum='"+list[i].mno+"' style='cursor:pointer' id='mnum' class='upview' >"
 										+ (i + 1)
 										+ "</td>"
-										+ "<td data-toggle='modal' data-target='#myModalU' data-name='"+list[i].m_name+"' data-info='"+list[i].m_info+"' data-price='"+list[i].m_price+"' data-img='"+list[i].m_img+"' data-mnum='"+list[i].mno+"' style='cursor:pointer; ' id='m_img' class='upview'><img src='../displayFile?fileName="
-										+ list[i].m_img
+										+ "<td data-toggle='modal' data-target='#myModalU' data-name='"+list[i].m_name+"' data-info='"+list[i].m_info+"' data-price='"+list[i].m_price+"' data-img='"+list[i].m_img+"' data-mnum='"+list[i].mno+"' style='cursor:pointer; ' id='m_img' class='upview'>"
+										+"<img src='../displayFile?fileName="+ list[i].m_img
 										+ "' style='width: 160px; height:100px;'></td>"
 										+ "<td data-toggle='modal' data-target='#myModalU' data-name='"+list[i].m_name+"' data-info='"+list[i].m_info+"' data-price='"+list[i].m_price+"' data-img='"+list[i].m_img+"' data-mnum='"+list[i].mno+"' style='cursor:pointer; ' id='m_name' class='upview'>"
 										+ list[i].m_name
@@ -784,10 +784,7 @@ html, body {
 
 						//////////////등록버튼 누르면 실행///////////
 						//insert
-						$("#insertmenu")
-								.on(
-										"click",
-										function(event) {
+						$("#insertmenu").on("click",function(event) {
 											event.preventDefault();
 											//파일정보를 가지고 있는 아이에요		
 											var files = document
@@ -797,11 +794,7 @@ html, body {
 											//obj로 데이터를 넣는게 아니라
 											//formData를 이용해서  데이터를 넣는다
 											var formData = new FormData();
-											formData
-													.append(
-															"file",
-															document
-																	.getElementById("menuimg").files[0]);
+											formData.append("file",document.getElementById("menuimg").files[0]);
 											formData.append("m_name", $(
 													"#menuname").val());
 											formData.append("m_price", $(
@@ -825,55 +818,37 @@ html, body {
 												return false;
 											} else {
 												//menuAdd가 실행 될 때 obj를 건네주고
-												menuManager
-														.menuAdd(
-																formData,
-																function() {
-																	//데이터 다 집어 넣었으면 파일부분 리셋해줘
-																	formData = null;
+												menuManager.menuAdd(formData,function() {
+													//데이터 다 집어 넣었으면 파일부분 리셋해줘
+													formData = null;
 
-																	$(".form")
-																			.each(
-																					function() {
-																						this
-																								.reset();
-																					});
+													$(".form").each(function() {
+														this.reset();
+													});
 
-																	menuManager
-																			.menuListAll(
-																					u_id,
-																					displayData);
-																});
+													menuManager.menuListAll(u_id,displayData);
+												});
 											}
 										});//end insert
 
 						////////////////////////update버튼 누르면 실행할 애///////////////////
-						$("#updatemenu")
-								.on(
-										"click",
-										function() {
+						$("#updatemenu").on("click",function() {
 
-											event.preventDefault();
-											var files = document
-													.getElementById("m_u_img_real").files[0];
+							event.preventDefault();
+							var files = document.getElementById("m_u_img_real").files[0];
 
-											console.log(files);
-											//console.log("files.name="+files.name);
-											var formData = new FormData();
+							console.log(files);
+							//console.log("files.name="+files.name);
+							var formData = new FormData();
 
-											formData.append("mno",
-													$("#m_u_mno").val());
-											formData.append("m_name", $(
-													"#m_u_name").val());
-											formData.append("m_price", $(
-													"#m_u_price").val());
-											formData.append("m_info", $(
-													"#m_u_info").val());
-											formData.append("u_id", u_id);
-											//formData.append("m_img",files.name);
+							formData.append("mno",$("#m_u_mno").val());
+							formData.append("m_name", $("#m_u_name").val());
+							formData.append("m_price", $("#m_u_price").val());
+							formData.append("m_info", $("#m_u_info").val());
+							formData.append("u_id", u_id);
+							//formData.append("m_img",files.name);
 
-											console.log("수정된 후 : "
-													+ $("#m_u_mno").val() + ","
+							console.log("수정된 후 : "+ $("#m_u_mno").val() + ","
 													+ $("#m_u_name").val()
 													+ ","
 													+ $("#m_u_price").val()
@@ -885,31 +860,17 @@ html, body {
 												console.log("없어");
 											} else {
 												console.log("있어");
-												formData
-														.append(
-																"file",
-																document
-																		.getElementById("m_u_img_real").files[0]);
+												formData.append("file",document.getElementById("m_u_img_real").files[0]);
 											}
 											console.log(formData);
 
-											menuManager
-													.menuUpdate(
-															formData,
-															function() {
-																$(".updateForm")
-																		.each(
-																				function() {
-																					this
-																							.reset();
-																				});
-																menuManager
-																		.menuListAll(
-																				u_id,
-																				displayData);
-																console
-																		.log("업데이트");
-															})
+											menuManager.menuUpdate(formData,function() {
+												$(".updateForm").each(function() {
+													this.reset();
+												});
+											menuManager.menuListAll(u_id,displayData);
+											console.log("업데이트");
+											})
 										});
 
 						////////////////////delete버튼 누르면 실행된 아이////////////////
@@ -995,7 +956,7 @@ html, body {
 							var location = data.list[0].location;
 							var time = data.info.sales_time;
 							var intro = data.info.co_intro;
-
+							var u_profile_img = data.info.u_profile_img;
 							infolist = "<colgroup><col width='40'><col width='60%'></colgroup><thead><tr><th>Foodtruck Name</th>"
 									+ "<th>"
 									+ co_name
@@ -1013,6 +974,8 @@ html, body {
 							$("#infoTable").html(infolist);
 							//	console.log(co_name);
 							$("#infoname").html(co_name);
+							$("#face").attr("src","../displayProfile?fileName="+u_profile_img);
+							
 						}
 
 						///////////////////////////////////////////////////////////

@@ -451,6 +451,7 @@ var OrderModule = (function() {
 		});
 	}
 	var notCook = function(id) {
+		console.log(id);
 		var html = "";
 		html += "<div id='chooseTime" + id + "'>";
 		html += "<div class='col-xs-8 col-md-8 stateDiv'>";

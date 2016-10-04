@@ -5,8 +5,7 @@
 <div id="mySidenav" class="sidenav navbar-fixed-top">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 	<div>
-		<img
-			src="http://news20.busan.com/content/image/2012/10/04/20121004000066_0.jpg"
+		<img src="http://news20.busan.com/content/image/2012/10/04/20121004000066_0.jpg"
 			width="150" height="150" style="border-radius: 100px;" id="face">
 		<br>
 	</div>

@@ -1,11 +1,19 @@
 package com.food.controller;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.inject.Inject;
+
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import com.food.domain.MemberVO;
 import com.food.services.Member.MemberService;
+import com.food.util.MediaUtils;
 import com.food.util.UploadFileUtils;
 
 @Controller
@@ -110,6 +119,47 @@ public class MemberController {
 		logger.info(vo.toString());
 		service.update(vo);
 	}
+	
+	//전송된 파일을 화면에 표시해주기 (대상 파일 데이터 읽기)
+		//특정 경로의 파일을 다시 브라우저로 전송해 주는 기능
+		@ResponseBody
+		@RequestMapping("/displayProfile")
+		public ResponseEntity<byte[]>  displayFile(String fileName)throws Exception{
+		    //파라미터로 브라우저에서 보고 싶은 파일의 이름을 받는다
+			//결과는 실제로 파일의 데이터를 나타낸댜
+		    InputStream in = null; 
+		    ResponseEntity<byte[]> entity = null;
+		    
+		    try{
+		      String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+		      //MediaType에서 확장자 추출하고 이미지타입일 때 MIME타입 지정 -> 확장자 추출해 주는곳!!! ->지금 나한테 필요없는거가튼데...
+		      MediaType mType = MediaUtils.getMediaType(formatName);
+		      
+		      HttpHeaders headers = new HttpHeaders();
+		      
+		      in = new FileInputStream(uploadPathRegister+fileName);
+		      
+		      if(mType != null){
+		        headers.setContentType(mType);
+		      }else{
+		        fileName = fileName.substring(fileName.indexOf("_")+1); 
+		        //이미지 아닐 때 
+		        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		        headers.add("Content-Disposition", "attachment; filename=\""+ 
+		          new String(fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
+		      }
+		      	//IOUtils.toByteArray->실제로 데이터를 읽는 부분
+		        entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), 
+		          headers, 
+		          HttpStatus.CREATED);
+		    }catch(Exception e){
+		      e.printStackTrace();
+		      entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		    }finally{
+		      in.close();
+		    }
+		      return entity;    
+		  }
 	
 
 }
