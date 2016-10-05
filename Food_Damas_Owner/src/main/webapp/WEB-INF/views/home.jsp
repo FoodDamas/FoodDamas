@@ -702,529 +702,489 @@ html, body {
 	var lat;
 	var co_name;
 
-	$(document)
-			.ready(
-					function() {
-						var info = {};
-						var u_id = $(".u_id").html(); //로그인 아이디
-						var obj = [];
-						var obj2 = [];
-						var page = "";
-						var paging = "";
-						var pageMaker = [];
-						var infolist = "";
-						////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						///////////////////////////////////////////////////예진이 메뉴//////////////////////////////////////////////////	
-						////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						//button
-						var state0 = "<a class='btn btn-warning btn-xs' role='button'>영업종료</a>";
-						var state1 = "<a class='btn btn-info btn-xs' role='button'>영업시작</a>";
-						menuManager.menuListAll(u_id, displayData);
+	$(document).ready(function() {
+		var info = {};
+		var u_id = $(".u_id").html(); //로그인 아이디
+		var obj = [];
+		var obj2 = [];
+		var page = "";
+		var paging = "";
+		var pageMaker = [];
+		var infolist = "";
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////예진이 메뉴//////////////////////////////////////////////////	
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//button
+		var state0 = "<a class='btn btn-warning btn-xs' role='button'>영업종료</a>";
+		var state1 = "<a class='btn btn-info btn-xs' role='button'>영업시작</a>";
+		menuManager.menuListAll(u_id, displayData);
 
-						function displayData(data) {
+		function displayData(data) {
 							//console.log(data);
-							var menuList = "";
-							var list = data.list;
-							for (var i = 0; i < list.length; i++) {
-								//button
-								var lee = list[i].m_state == 0 ? state0
-										: state1;
-								menuList += "<tr>"
-										+ "<td class='vac' data-target='#myModalU' data-name='"+list[i].m_name+"' data-info='"+list[i].m_info+"' data-price='"+list[i].m_price+"' data-img='"+list[i].m_img+"' data-mnum='"+list[i].mno+"' style='cursor:pointer' id='mnum' class='upview' >"
-										+ (i + 1)
-										+ "</td>"
-										+ "<td data-toggle='modal' data-target='#myModalU' data-name='"+list[i].m_name+"' data-info='"+list[i].m_info+"' data-price='"+list[i].m_price+"' data-img='"+list[i].m_img+"' data-mnum='"+list[i].mno+"' style='cursor:pointer; ' id='m_img' class='upview'>"
-										+"<img src='../displayFile?fileName="+ list[i].m_img
-										+ "' style='width: 160px; height:100px;'></td>"
-										+ "<td data-toggle='modal' data-target='#myModalU' data-name='"+list[i].m_name+"' data-info='"+list[i].m_info+"' data-price='"+list[i].m_price+"' data-img='"+list[i].m_img+"' data-mnum='"+list[i].mno+"' style='cursor:pointer; ' id='m_name' class='upview'>"
-										+ list[i].m_name
-										+ "</td>"
-										+ "<td data-toggle='modal' data-target='#myModalU' data-name='"+list[i].m_name+"' data-info='"+list[i].m_info+"' data-price='"+list[i].m_price+"' data-img='"+list[i].m_img+"' data-mnum='"+list[i].mno+"' style='cursor:pointer; ' id='m_info' class='upview'>"
-										+ list[i].m_info
-										+ "</td>"
-										+ "<td data-toggle='modal' data-target='#myModalU' data-name='"+list[i].m_name+"' data-info='"+list[i].m_info+"' data-price='"+list[i].m_price+"' data-img='"+list[i].m_img+"' data-mnum='"+list[i].mno+"' style='cursor:pointer' id='m_price' class='upview'>"
-										+ list[i].m_price
-										+ "</td>"
-										+ "<td  data-mnum='"+list[i].mno+"' data-state='"+list[i].m_state+"'  style='cursor:pointer' class='state ' style='text-align:center'>"
-										+ lee + "</td>" + "</tr>";
-							}
-							$("#menuList").html(menuList);
+			var menuList = "";
+			var list = data.list;
+							
+			for (var i = 0; i < list.length; i++) {
+				//button
+				var lee = list[i].m_state == 0 ? state0 : state1;
+					menuList += "<tr>"
+						+ "<td class='vac' data-target='#myModalU' data-name='"+list[i].m_name+"' data-info='"+list[i].m_info+"' data-price='"+list[i].m_price+"' data-img='"+list[i].m_img+"' data-mnum='"+list[i].mno+"' style='cursor:pointer' id='mnum' class='upview' >"
+						+ (i + 1)
+						+ "</td>"
+						+ "<td data-toggle='modal' data-target='#myModalU' data-name='"+list[i].m_name+"' data-info='"+list[i].m_info+"' data-price='"+list[i].m_price+"' data-img='"+list[i].m_img+"' data-mnum='"+list[i].mno+"' style='cursor:pointer; ' id='m_img' class='upview'>"
+						+"<img src='../displayFile?fileName="+ list[i].m_img
+						+ "' style='width: 160px; height:100px;'></td>"
+						+ "<td data-toggle='modal' data-target='#myModalU' data-name='"+list[i].m_name+"' data-info='"+list[i].m_info+"' data-price='"+list[i].m_price+"' data-img='"+list[i].m_img+"' data-mnum='"+list[i].mno+"' style='cursor:pointer; ' id='m_name' class='upview'>"
+						+ list[i].m_name
+						+ "</td>"
+						+ "<td data-toggle='modal' data-target='#myModalU' data-name='"+list[i].m_name+"' data-info='"+list[i].m_info+"' data-price='"+list[i].m_price+"' data-img='"+list[i].m_img+"' data-mnum='"+list[i].mno+"' style='cursor:pointer; ' id='m_info' class='upview'>"
+						+ list[i].m_info
+						+ "</td>"
+						+ "<td data-toggle='modal' data-target='#myModalU' data-name='"+list[i].m_name+"' data-info='"+list[i].m_info+"' data-price='"+list[i].m_price+"' data-img='"+list[i].m_img+"' data-mnum='"+list[i].mno+"' style='cursor:pointer' id='m_price' class='upview'>"
+						+ list[i].m_price
+						+ "</td>"
+						+ "<td  data-mnum='"+list[i].mno+"' data-state='"+list[i].m_state+"'  style='cursor:pointer' class='state ' style='text-align:center'>"
+						+ lee + "</td>" + "</tr>";
+			}$("#menuList").html(menuList);
 
-						}//end display
-						///////////////////button on/off////////////////////////
-						$("#menuList").on("click", ".state", function() {
-							$this = $(this);
-							var m_mno = $this.attr("data-mnum");
-							var state = $this.attr("data-state");
+		}//end display
+		///////////////////button on/off////////////////////////
+		$("#menuList").on("click", ".state", function() {
+			$this = $(this);
+			var m_mno = $this.attr("data-mnum");
+			var state = $this.attr("data-state");
 							//console.log("m_mno : " + m_mno);
 							//console.log("state: " + state);
 
-							if (state == 1) {
+			if (state == 1) {
 								//console.log("음식팔어");
-								$("#m_u_name").val(state);
+				$("#m_u_name").val(state);
 
-								obj = {
-									mno : m_mno,
-									m_state : "0"
-								}
-								console.log(obj);
-							} else {
+				obj = {
+						mno : m_mno,
+						m_state : "0"
+					}
+					console.log(obj);
+			} else {
 								//console.log("음식안팔어");
-								$("#m_u_name").val(state);
-								obj = {
-									mno : m_mno,
-									m_state : "1"
-								}
+				$("#m_u_name").val(state);
+				obj = {
+						mno : m_mno,
+						m_state : "1"
+					}
 								//console.log(obj);
-							}
-							menuManager.stateUpdate(obj, function() {
-								menuManager.menuListAll(u_id, displayData);
-							})
-						});//end onclick
-
-						//////////////등록버튼 누르면 실행///////////
-						//insert
-						$("#insertmenu").on("click",function(event) {
-											event.preventDefault();
-											//파일정보를 가지고 있는 아이에요		
-											var files = document
-													.getElementById("menuimg").files[0];
-											console.log(files);
-
-											//obj로 데이터를 넣는게 아니라
-											//formData를 이용해서  데이터를 넣는다
-											var formData = new FormData();
-											formData.append("file",document.getElementById("menuimg").files[0]);
-											formData.append("m_name", $(
-													"#menuname").val());
-											formData.append("m_price", $(
-													"#menuprice").val());
-											formData.append("m_info", $(
-													"#menuinfo").val());
-											formData.append("u_id", u_id);
-
-											console.log(formData);
-											if ($("#menuimg").val() == "") {
-												alert("사진을 넣어주세요");
-												return false;
-											} else if ($("#menuname").val() == "") {
-												alert("이름을 입력해 주세요");
-												return false;
-											} else if ($("#menuprice").val() == "") {
-												alert("가격을 입력해 주세요");
-												return false;
-											} else if ($("#menuinfo").val() == "") {
-												alert("정보를 입력해 주세요");
-												return false;
-											} else {
-												//menuAdd가 실행 될 때 obj를 건네주고
-												menuManager.menuAdd(formData,function() {
-													//데이터 다 집어 넣었으면 파일부분 리셋해줘
-													formData = null;
-
-													$(".form").each(function() {
-														this.reset();
-													});
-
-													menuManager.menuListAll(u_id,displayData);
-												});
-											}
-										});//end insert
-
-						////////////////////////update버튼 누르면 실행할 애///////////////////
-						$("#updatemenu").on("click",function() {
-
-							event.preventDefault();
-							var files = document.getElementById("m_u_img_real").files[0];
-
-							console.log(files);
-							//console.log("files.name="+files.name);
-							var formData = new FormData();
-
-							formData.append("mno",$("#m_u_mno").val());
-							formData.append("m_name", $("#m_u_name").val());
-							formData.append("m_price", $("#m_u_price").val());
-							formData.append("m_info", $("#m_u_info").val());
-							formData.append("u_id", u_id);
-							//formData.append("m_img",files.name);
-
-							console.log("수정된 후 : "+ $("#m_u_mno").val() + ","
-													+ $("#m_u_name").val()
-													+ ","
-													+ $("#m_u_price").val()
-													+ ","
-													+ $("#m_u_info").val()
-													+ "," + u_id);
-											//만약 img를 업로드 한다면(img값이 있다면) document.getElementBg_real")
-											if ($("#m_u_img_real").val() == "") {
-												console.log("없어");
-											} else {
-												console.log("있어");
-												formData.append("file",document.getElementById("m_u_img_real").files[0]);
-											}
-											console.log(formData);
-
-											menuManager.menuUpdate(formData,function() {
-												$(".updateForm").each(function() {
-													this.reset();
-												});
-											menuManager.menuListAll(u_id,displayData);
-											console.log("업데이트");
-											})
-										});
-
-						////////////////////delete버튼 누르면 실행된 아이////////////////
-						$("#deletemenu").on("click", function() {
-
-							obj3 = {
-								mno : $("#m_u_mno").val(),
-								u_id : u_id,
-								fileName : $("#m_u_img").val()
-							}
-							console.log(obj3);
-
-							menuManager.menuDelete(obj3, function() {
-								if (obj3 == "deleted") {
-								}
-								menuManager.menuListAll(u_id, displayData);
-							})
-
-						});
-
-						//////////////////update view////////////////
-						//List클릭하면 upview라는 클래스에서
-						$("#menuList").on(
-								"click",
-								".upview",
-								function() {
-									$this = $(this);
-									console.log($this);
-									//데이터의 값을 m_name에 담는다
-									var m_name = $this.attr("data-name");
-									var m_info = $this.attr("data-info");
-									var m_price = $this.attr("data-price");
-									var mno = $this.attr("data-mnum");
-									var m_img = $this.attr("data-img");
-
-									console.log("m_name = " + m_name + ","
-											+ "m_info = " + m_info + ","
-											+ "m_price = " + m_price + ","
-											+ "mno = " + mno + "," + "m_img = "
-											+ m_img);
-									//m_name에 담은 값을 m_u_name에 집어넣어준다
-									$("#m_u_mno").val(mno);
-									$("#m_u_name").val(m_name);
-									$("#m_u_info").val(m_info);
-									$("#m_u_price").val(m_price);
-									$("#m_u_img").val(m_img);
-
-								});
-						////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						///////////////////////////////////////////////////예진이 메뉴//////////////////////////////////////////////////	
-						////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-						/* 성현 추가 */
-						// var u_id = "zzennam";
-						statManager.statement(u_id);
-						//console.log("실행중");				
-
-						/* 성현 추가 */
-
-						infoManager.view(u_id, displayInfo);
-						function displayInfo(data) {
-
-							console.log(data);
-							//지도, 이름
-							lng = data.list[0].lng;
-							lat = data.list[0].lat;
-							co_name = data.info.co_name;
-
-							if (lng == 0) {
-								navigator.geolocation
-										.getCurrentPosition(function(position) {
-											lat = position.coords.latitude;
-											lng = position.coords.longitude;
-											initMap(lat, lng, co_name);
-
-										});
-
-							} else {
-								initMap(lat, lng, co_name);
-
-							}
-							var phone = data.info.u_phone;//폰번호
-							var location = data.list[0].location;
-							var time = data.info.sales_time;
-							var intro = data.info.co_intro;
-							var u_profile_img = data.info.u_profile_img;
-							infolist = "<colgroup><col width='40'><col width='60%'></colgroup><thead><tr><th>Foodtruck Name</th>"
-									+ "<th>"
-									+ co_name
-									+ "</th></tr></thead><tbody><tr><td>Phone</td><td>"
-									+ phone
-									+ "</td></tr></tbody><tr><td>Location</td>"
-									+ "<td>"
-									+ location
-									+ "</td></tr></tbody><tr><td>Open - Close</td><td>"
-									+ time
-									+ "</td></tr></tbody><tr><td>introduction</td>"
-									+ "<td>" + intro + "</td></tr></tbody>";
-							//console.log(infolist);
-
-							$("#infoTable").html(infolist);
-							//	console.log(co_name);
-							$("#infoname").html(co_name);
-							$("#face").attr("src","../displayProfile?fileName="+u_profile_img);
-							
-						}
-
-						///////////////////////////////////////////////////////////
-
-						var u_id = $(".u_id").html();
-						var writer = $(".u_id").html(); // 푸드트럭 사장 아이디
-						var qno;
-
-						//console.log(u_id);
-
-						/////////////////////////////////////////////////////////////////////////////////////////          
-						///////////////////////////////////////    QNA AJAX 시작       ///////////////////////////////
-						///////////////////////////////////////////////////////////////////////////////////////// 
-
-						qnaManager.BoardList(u_id, page, display);
-
-						function display(data) {
-
-							var listBoard = "";
-							var list = data.list;
-
-							pageMaker = data.pageMaker;
-
-							for (var i = 0; i < list.length; i++) {
-
-								var str = list[i].anscnt == 0 ? "답변안함"
-										: "답변 수:" + list[i].anscnt;
-								var fontcolor = list[i].anscnt == 0 ? "color:red"
-										: "color:blue";
-
-								listBoard += "<tr data-toggle='modal' data-target='#myModalUqna' style='cursor: pointer;' class='pop' data-qno='"+list[i].qno+"' data-c_id='"+list[i].c_id+"'  data-q_title='"+list[i].q_title+"'  data-q_content='"+list[i].q_content+"' >"
-										+ "<td class='tc'>"
-										+ list[i].qno
-										+ "</td>"
-										+ "<td>"
-										+ list[i].q_title
-										+ "</td>"
-										+ "<td class='tc'>"
-										+ list[i].c_id
-										+ "</td>"
-										+ "<td class='tc'>"
-										+ qnaManager
-												.formatdate(list[i].reg_date)
-										+ "</td>"
-										+ "<td class='tc'>"
-										+ qnaManager
-												.formatdate(list[i].modi_date)
-										+ "</td>"
-										+ "<td class='tc'><span style='"+fontcolor+"'>"
-										+ str + "</span></td>" + "</tr> "
-
-							}
-
-							$("#list").html(listBoard);
-
-							//댓글 페이징부분
-							pagingView();
-
-						}
-
-						/////////////////////////////////////////////////////////////////////////////////////////          
-						////////////////////////////////////QNA pageing 시작       /////////////////////////////////
-						/////////////////////////////////////////////////////////////////////////////////////////
-
-						function pagingView() {
-							paging = "";
-							if (pageMaker.prev) {
-								paging += "<li><a href='"
-										+ (pageMaker.start - 1)
-										+ "'>◀</a></li>";
-							}
-							for (var i = pageMaker.start; i <= pageMaker.end; i++) {
-								paging += "<li><a href='"+i+"'>" + i
-										+ "</a></li>";
-
-							}
-							if (pageMaker.next) {
-								paging += "<li><a href='" + (pageMaker.end + 1)
-										+ "'>▶</a></li>";
-							}
-							$("#paging-comment").html(paging);
-
-						}
-						$("#paging-comment")
-								.on(
-										"click",
-										"li a",
-										function(event) {
-											event.preventDefault();
-											console
-													.log("paging.......................");
-
-											var page = $(this).attr("href");
-											qnaManager.BoardList(u_id, page,
-													display);
-										});
-
-						/////////////////////////////////////////////////////////////////////////////////////////          
-						/////////////////////////////////////   QNA VIEW 시작       //////////////////////////////////
-						/////////////////////////////////////////////////////////////////////////////////////////         
-
-						$(".view").on("click", ".pop", function() { //.view 뿌려지느 클래스  .pop 해당 클래스
-							$this = $(this);
-							qno = $this.attr("data-qno");
-							var q_title = $this.attr("data-q_title");
-							var c_id = $this.attr("data-c_id");
-							var q_content = $this.attr("data-q_content");
-
-							$(".qno").val(qno);
-							$(".q_title").val(q_title);
-							$(".c_id").val(c_id);
-							$(".q_content").val(q_content);
-							qnaManager.AnswerList(qno, display2);
-
-						});
-
-						/////////////////////////////////////////////////////////////////////////////////////////          
-						////////////////////////////////////QNA Answer 시작       /////////////////////////////////
-						/////////////////////////////////////////////////////////////////////////////////////////      
-
-						//   qnaManager.AnswerList(qno, display2);
-						var obj = [];
-
-						function display2(answer) {
-
-							var answerList = "";
-							var lista = answer.list;
-							for (var i = 0; i < lista.length; i++) {
-								answerList +=
-
-								"<div class='direct-chat-info clearfix'><span class='direct-chat-name pull-left'>"
-										+ lista[i].writer
-										+ "</span><span class='tl'> </span> <span class='direct-chat-timestamp pull-right'>"
-										+ qnaManager
-												.formatdate(lista[i].modi_date)
-										+ "</span></div><img class='direct-chat-img' src='resources/assets/img/user3.jpg'><div class='direct-chat-text tl'>"
-										+ lista[i].a_content
-										+ "</div><div class='timeline-footer' style='text-align: left; margin-top: 10px; margin-left: 50px;'>"
-										+ "<a class='btn btn-default btn-xs delete' data-qno='"+lista[i].qno+"' data-ano='"+lista[i].ano+"' data-a_content='"+lista[i].a_content+"' data-writer='"+lista[i].writer+"' ><i class='fa fa-times'></i>삭제</a>"
-										+ "<a class='btn btn-default btn-xs update'  data-ano='"+lista[i].ano+"' data-a_content='"+lista[i].a_content+"' data-writer='"+lista[i].writer+"'  style='margin-left:2px;' ><i class='fa fa-wrench'></i>수정</a></div>"
-							}
-
-							$(".answer").html(answerList);
-
-						}
-						var obj = [];
-
-						/////////////////////////////////////////////////////////////////////////////////////////          
-						////////////////////////////////////QNA Answer 삭제        //////////////////////////////////
-						/////////////////////////////////////////////////////////////////////////////////////////
-
-						$(".answer").on("click", ".delete", function() {
-							$this = $(this);
-							obj = {
-								ano : $this.attr("data-ano"),
-								writer : writer,
-								qno : $this.attr("data-qno")
-
-							}
-
-							qnaManager.Delete(obj, function() {
-
-								qnaManager.AnswerList(qno, display2); // 댓글
-								qnaManager.BoardList(u_id, page, display); // view
-							});
-
-						});
-
-						/////////////////////////////////////////////////////////////////////////////////////////          
-						///////////////////////////////////  QNA Answer 글쓰기       //////////////////////////////////
-						/////////////////////////////////////////////////////////////////////////////////////////
-
-						var obj = [];
-
-						$(".create").on("click", function() {
-
-							obj = {
-								qno : qno,
-								a_content : $(".createa").val(),
-								writer : writer
-							};
-							qnaManager.Insert(obj, function() {
-
-								qnaManager.AnswerList(qno, display2);
-
-								alert("댓글이 등록 되었습니다");
-								qnaManager.BoardList(u_id, page, display);
-
-							});
-
-							$(".createa").val("");
-
-						});
-
-						/////////////////////////////////////////////////////////////////////////////////////////          
-						////////////////////////////////////QNA Answer수정 폽으로 값전송        /////////////////////////////////
-						/////////////////////////////////////////////////////////////////////////////////////////
-
-						$(".answer").on("click", ".update", function() {
-
-							var aa = $('#add');
-							aa.addClass('hide');
-
-							var aa = $('#reply');
-							aa.removeClass('hide1');
-
-							$this = $(this);
-							//console.log("수정하는곳 들어와???????");
-							var ano = $this.attr("data-ano");
-							var writer = $this.attr("data-writer");
-							var a_content = $this.attr("data-a_content");
-
-							$(".ano").val(ano);
-							$(".writer").val(writer);
-							$(".a_content").val(a_content);
-
-						});
-
-						/////////////////////////////////////////////////////////////////////////////////////////          
-						////////////////////////////////////QNA Answer 클릭시 수정        /////////////////////////////////
-						/////////////////////////////////////////////////////////////////////////////////////////
-
-						$("#update").on("click", function() {
-							obj = {
-								qno : qno,
-								ano : $(".ano").val(),
-								a_content : $(".a_content").val(),
-								writer : $(".writer").val()
-							};
-
-							console.log(obj);
-
-							var aa = $('#add');
-							aa.addClass('look');
-
-							var aa = $('#add');
-							aa.removeClass('hide');
-
-							var aa = $('#reply');
-							aa.addClass('hide');
-
-							qnaManager.Update(obj, function() {
-
-								qnaManager.AnswerList(qno, display2);
-
-							})
-						});
-
+			}
+			
+			menuManager.stateUpdate(obj, function() {
+				menuManager.menuListAll(u_id, displayData);
+			})
+		});//end onclick
+
+		//////////////등록버튼 누르면 실행///////////
+		//insert
+		$("#insertmenu").on("click",function(event) {
+			event.preventDefault();
+			//파일정보를 가지고 있는 아이에요		
+			var files = document.getElementById("menuimg").files[0];
+			console.log(files);
+
+			//obj로 데이터를 넣는게 아니라
+			//formData를 이용해서  데이터를 넣는다
+			var formData = new FormData();
+			formData.append("file",document.getElementById("menuimg").files[0]);
+			formData.append("m_name", $("#menuname").val());
+			formData.append("m_price", $("#menuprice").val());
+			formData.append("m_info", $("#menuinfo").val());
+			formData.append("u_id", u_id);
+
+			console.log(formData);
+			if ($("#menuimg").val() == "") {
+				alert("사진을 넣어주세요");
+				return false;
+			} else if ($("#menuname").val() == "") {
+				alert("이름을 입력해 주세요");
+				return false;
+			} else if ($("#menuprice").val() == "") {
+				alert("가격을 입력해 주세요");
+				return false;
+			} else if ($("#menuinfo").val() == "") {
+				alert("정보를 입력해 주세요");
+				return false;
+			} else {
+				//menuAdd가 실행 될 때 obj를 건네주고
+				menuManager.menuAdd(formData,function() {
+					//데이터 다 집어 넣었으면 파일부분 리셋해줘
+					formData = null;
+
+					$(".form").each(function() {
+						this.reset();
 					});
+
+					menuManager.menuListAll(u_id,displayData);
+				});
+			}
+		});//end insert
+
+		////////////////////////update버튼 누르면 실행할 애///////////////////
+		$("#updatemenu").on("click",function() {
+
+			event.preventDefault();
+			var files = document.getElementById("m_u_img_real").files[0];
+
+			console.log(files);
+			//console.log("files.name="+files.name);
+			var formData = new FormData();
+
+			formData.append("mno",$("#m_u_mno").val());
+			formData.append("m_name", $("#m_u_name").val());
+			formData.append("m_price", $("#m_u_price").val());
+			formData.append("m_info", $("#m_u_info").val());
+			formData.append("u_id", u_id);
+			//formData.append("m_img",files.name);
+
+			console.log("수정된 후 : "+ $("#m_u_mno").val() + ","+ $("#m_u_name").val()+ ","+ $("#m_u_price").val()
+							+ ","+ $("#m_u_info").val()+ "," + u_id);
+			//만약 img를 업로드 한다면(img값이 있다면) document.getElementBg_real")
+			if ($("#m_u_img_real").val() == "") {
+				console.log("없어");
+			} else {
+				console.log("있어");
+				formData.append("file",document.getElementById("m_u_img_real").files[0]);
+			}
+			console.log(formData);
+
+			menuManager.menuUpdate(formData,function() {
+				$(".updateForm").each(function() {
+					this.reset();
+				});
+				menuManager.menuListAll(u_id,displayData);
+				console.log("업데이트");
+			})
+		});
+
+		////////////////////delete버튼 누르면 실행된 아이////////////////
+		$("#deletemenu").on("click", function() {
+
+			obj3 = {
+						mno : $("#m_u_mno").val(),
+						u_id : u_id,
+						fileName : $("#m_u_img").val()
+					}
+			console.log(obj3);
+
+			menuManager.menuDelete(obj3, function() {
+				if (obj3 == "deleted") {
+					}
+				menuManager.menuListAll(u_id, displayData);
+			})
+
+		});
+
+		//////////////////update view////////////////
+		//List클릭하면 upview라는 클래스에서
+		$("#menuList").on("click",".upview",function() {
+			$this = $(this);
+			console.log($this);
+			//데이터의 값을 m_name에 담는다
+			var m_name = $this.attr("data-name");
+			var m_info = $this.attr("data-info");
+			var m_price = $this.attr("data-price");
+			var mno = $this.attr("data-mnum");
+			var m_img = $this.attr("data-img");
+
+			console.log("m_name = " + m_name + ","+ "m_info = " + m_info + ","+ "m_price = " + m_price + ","
+							+ "mno = " + mno + "," + "m_img = "+ m_img);
+			//m_name에 담은 값을 m_u_name에 집어넣어준다
+			$("#m_u_mno").val(mno);
+			$("#m_u_name").val(m_name);
+			$("#m_u_info").val(m_info);
+			$("#m_u_price").val(m_price);
+			$("#m_u_img").val(m_img);
+
+		});
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////예진이 메뉴//////////////////////////////////////////////////	
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		/* 성현 추가 */
+		// var u_id = "zzennam";
+		statManager.statement(u_id);
+		//console.log("실행중");				
+
+		/* 성현 추가 */
+
+		infoManager.view(u_id, displayInfo);
+		function displayInfo(data) {
+
+			console.log(data);
+			//지도, 이름
+			lng = data.list[0].lng;
+			lat = data.list[0].lat;
+			co_name = data.info.co_name;
+
+			if (lng == 0) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					lat = position.coords.latitude;
+					lng = position.coords.longitude;
+					initMap(lat, lng, co_name);
+				});
+
+			} else {
+				initMap(lat, lng, co_name);
+
+			}
+			var phone = data.info.u_phone;//폰번호
+			var location = data.list[0].location;
+			var time = data.info.sales_time;
+			var intro = data.info.co_intro;
+			var u_profile_img = data.info.u_profile_img;
+			infolist = "<colgroup><col width='40'><col width='60%'></colgroup><thead><tr><th>Foodtruck Name</th>"
+					+ "<th>"
+					+ co_name
+					+ "</th></tr></thead><tbody><tr><td>Phone</td><td>"
+					+ phone
+					+ "</td></tr></tbody><tr><td>Location</td>"
+					+ "<td>"
+					+ location
+					+ "</td></tr></tbody><tr><td>Open - Close</td><td>"
+					+ time
+					+ "</td></tr></tbody><tr><td>introduction</td>"
+					+ "<td>" + intro + "</td></tr></tbody>";
+					//console.log(infolist);
+
+					$("#infoTable").html(infolist);
+							//	console.log(co_name);
+					$("#infoname").html(co_name);
+					$("#face").attr("src","../displayProfile?fileName="+u_profile_img);
+							
+		}
+
+		///////////////////////////////////////////////////////////
+
+		var u_id = $(".u_id").html();
+		var writer = $(".u_id").html(); // 푸드트럭 사장 아이디
+		var qno;
+
+		//console.log(u_id);
+
+		/////////////////////////////////////////////////////////////////////////////////////////          
+		///////////////////////////////////////    QNA AJAX 시작       ///////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////// 
+
+		qnaManager.BoardList(u_id, page, display);
+
+		function display(data) {
+
+			var listBoard = "";
+			var list = data.list;
+
+			pageMaker = data.pageMaker;
+
+			for (var i = 0; i < list.length; i++) {
+
+				var str = list[i].anscnt == 0 ? "답변안함" : "답변 수:" + list[i].anscnt;
+				var fontcolor = list[i].anscnt == 0 ? "color:red" : "color:blue";
+
+				listBoard += "<tr data-toggle='modal' data-target='#myModalUqna' style='cursor: pointer;' class='pop' data-qno='"+list[i].qno+"' data-c_id='"+list[i].c_id+"'  data-q_title='"+list[i].q_title+"'  data-q_content='"+list[i].q_content+"' >"
+					+ "<td class='tc'>"
+					+ list[i].qno
+					+ "</td>"
+					+ "<td>"
+					+ list[i].q_title
+					+ "</td>"
+					+ "<td class='tc'>"
+					+ list[i].c_id
+					+ "</td>"
+					+ "<td class='tc'>"
+					+ qnaManager.formatdate(list[i].reg_date)
+					+ "</td>"
+					+ "<td class='tc'>"
+					+ qnaManager.formatdate(list[i].modi_date)
+					+ "</td>"
+					+ "<td class='tc'><span style='"+fontcolor+"'>"
+					+ str + "</span></td>" + "</tr> "
+
+			}
+
+			$("#list").html(listBoard);
+
+			//댓글 페이징부분
+			pagingView();
+
+		}
+
+		/////////////////////////////////////////////////////////////////////////////////////////          
+		////////////////////////////////////QNA pageing 시작       /////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////
+
+		function pagingView() {
+			paging = "";
+			if (pageMaker.prev) {
+				paging += "<li><a href='"+ (pageMaker.start - 1)+ "'>◀</a></li>";
+			}
+			for (var i = pageMaker.start; i <= pageMaker.end; i++) {
+				paging += "<li><a href='"+i+"'>" + i+ "</a></li>";
+			}
+			if (pageMaker.next) {
+				paging += "<li><a href='" + (pageMaker.end + 1)+ "'>▶</a></li>";
+			}
+			$("#paging-comment").html(paging);
+
+		}
+		$("#paging-comment").on("click","li a",function(event) {
+			event.preventDefault();
+			console.log("paging.......................");
+
+			var page = $(this).attr("href");
+			qnaManager.BoardList(u_id, page,display);
+		});
+
+		/////////////////////////////////////////////////////////////////////////////////////////          
+		/////////////////////////////////////   QNA VIEW 시작       //////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////         
+
+		$(".view").on("click", ".pop", function() { //.view 뿌려지느 클래스  .pop 해당 클래스
+			$this = $(this);
+			qno = $this.attr("data-qno");
+			var q_title = $this.attr("data-q_title");
+			var c_id = $this.attr("data-c_id");
+			var q_content = $this.attr("data-q_content");
+
+			$(".qno").val(qno);
+			$(".q_title").val(q_title);
+			$(".c_id").val(c_id);
+			$(".q_content").val(q_content);
+			qnaManager.AnswerList(qno, display2);
+
+		});
+
+		/////////////////////////////////////////////////////////////////////////////////////////          
+		////////////////////////////////////QNA Answer 시작       /////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////      
+
+		//   qnaManager.AnswerList(qno, display2);
+		var obj = [];
+
+		function display2(answer) {
+
+			var answerList = "";
+			var lista = answer.list;
+			for (var i = 0; i < lista.length; i++) {
+				answerList +="<div class='direct-chat-info clearfix'><span class='direct-chat-name pull-left'>"
+						+ lista[i].writer
+						+ "</span><span class='tl'> </span> <span class='direct-chat-timestamp pull-right'>"
+						+ qnaManager.formatdate(lista[i].modi_date)
+						+ "</span></div><img class='direct-chat-img' src='resources/assets/img/user3.jpg'><div class='direct-chat-text tl'>"
+						+ lista[i].a_content
+						+ "</div><div class='timeline-footer' style='text-align: left; margin-top: 10px; margin-left: 50px;'>"
+						+ "<a class='btn btn-default btn-xs delete' data-qno='"+lista[i].qno+"' data-ano='"+lista[i].ano+"' data-a_content='"+lista[i].a_content+"' data-writer='"+lista[i].writer+"' ><i class='fa fa-times'></i>삭제</a>"
+						+ "<a class='btn btn-default btn-xs update'  data-ano='"+lista[i].ano+"' data-a_content='"+lista[i].a_content+"' data-writer='"+lista[i].writer+"'  style='margin-left:2px;' ><i class='fa fa-wrench'></i>수정</a></div>"
+			}
+
+			$(".answer").html(answerList);
+
+		}
+		var obj = [];
+
+		/////////////////////////////////////////////////////////////////////////////////////////          
+		////////////////////////////////////QNA Answer 삭제        //////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////
+
+		$(".answer").on("click", ".delete", function() {
+			$this = $(this);
+			obj = {
+					ano : $this.attr("data-ano"),
+					writer : writer,
+					qno : $this.attr("data-qno")
+
+				}
+
+			qnaManager.Delete(obj, function() {
+
+				qnaManager.AnswerList(qno, display2); // 댓글
+				qnaManager.BoardList(u_id, page, display); // view
+			});
+
+		});
+
+		/////////////////////////////////////////////////////////////////////////////////////////          
+		///////////////////////////////////  QNA Answer 글쓰기       //////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////
+
+		var obj = [];
+
+		$(".create").on("click", function() {
+
+			obj = {
+					qno : qno,
+					a_content : $(".createa").val(),
+					writer : writer
+				};
+			qnaManager.Insert(obj, function() {
+				qnaManager.AnswerList(qno, display2);
+				alert("댓글이 등록 되었습니다");
+				qnaManager.BoardList(u_id, page, display);
+			});
+
+			$(".createa").val("");
+
+		});
+
+		/////////////////////////////////////////////////////////////////////////////////////////          
+		////////////////////////////////////QNA Answer수정 폽으로 값전송        /////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////
+
+		$(".answer").on("click", ".update", function() {
+
+			var aa = $('#add');
+			aa.addClass('hide');
+
+			var aa = $('#reply');
+			aa.removeClass('hide1');
+
+			$this = $(this);
+							//console.log("수정하는곳 들어와???????");
+			var ano = $this.attr("data-ano");
+			var writer = $this.attr("data-writer");
+			var a_content = $this.attr("data-a_content");
+
+			$(".ano").val(ano);
+			$(".writer").val(writer);
+			$(".a_content").val(a_content);
+
+		});
+
+		/////////////////////////////////////////////////////////////////////////////////////////          
+		////////////////////////////////////QNA Answer 클릭시 수정        /////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////
+
+		$("#update").on("click", function() {
+			obj = {
+					qno : qno,
+					ano : $(".ano").val(),
+					a_content : $(".a_content").val(),
+					writer : $(".writer").val()
+				};
+
+			console.log(obj);
+
+			var aa = $('#add');
+			aa.addClass('look');
+
+			var aa = $('#add');
+			aa.removeClass('hide');
+
+			var aa = $('#reply');
+			aa.addClass('hide');
+
+			qnaManager.Update(obj, function() {
+
+				qnaManager.AnswerList(qno, display2);
+
+			})
+		});
+
+	});
 
 	function initMap(lat, lng, co_name) {
 		var myLatlng = new google.maps.LatLng(lat, lng);

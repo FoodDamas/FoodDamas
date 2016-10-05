@@ -94,8 +94,8 @@ public class MemberController {
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyGET(Model model, String u_id)throws Exception{
 		logger.info("회원가입 수정 화면");
-		model.addAttribute("modify", service.view("food1"));
-		 logger.info(""+service.view("food1"));
+		model.addAttribute("modify", service.view(u_id));
+		 logger.info(""+service.view(u_id));
 		return "modify";
 		
 	}

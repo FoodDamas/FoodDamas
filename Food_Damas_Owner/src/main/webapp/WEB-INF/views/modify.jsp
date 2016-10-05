@@ -90,12 +90,12 @@
 			<form role="form" method="post" class="login-form" action="" id="modifyform">
             <div class="form-group">
                 <label class="sr-only" for="u_id"></label>
-                <input type="form-control" value="${modify.u_id}" placeholder="아이디를 입력하세요" class="form-UserID form-control" id="modifyuid" readonly="readonly">
+                <input type="form-control" value="${login.u_id}" placeholder="아이디를 입력하세요" class="form-UserID form-control" id="modifyuid" readonly="readonly">
             </div>
 
             <div class="form-group">
                 <label class="sr-only" for="u_pw"></label>
-                <input value="${modify.u_pw}" placeholder="패스워드를 입력하세요" class="UserPW form-control" id="modifyupw">
+                <input value="${login.u_pw}" placeholder="패스워드를 입력하세요" class="UserPW form-control" id="modifyupw">
             </div>
 
             <div class="form-group">
@@ -195,6 +195,7 @@
 		<script>
 	 	var fcode=$(".fcode").val();
 		console.log(fcode);
+		//console.log(${login});
 		$("#registerfcode option[value='"+fcode+"']").attr("selected", "selected");
  
 		$(document).ready(function(){
