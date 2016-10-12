@@ -415,10 +415,10 @@ html, body {
 									<th>사진</th>
 									<td><input type="file" name="mfile" id="m_u_img_real"></td>
 								</tr>
-								<tr>
-									<th>이미지경로값</th>
-									<td><input id="m_u_img" type="text" class="form-control"
-										readonly="readonly"></td>
+								<tr style="display: none">
+									<th >이미지경로값</th>
+									<td><input id="m_u_img" type="hidden" class="form-control"
+										readonly="readonly" ></td>
 								</tr>
 								<tr>
 									<th>이름</th>
@@ -520,6 +520,56 @@ html, body {
 		</ul>
 	</div>
 </div>
+
+<div id="noticeContainer">
+		<div class="row">
+			<div class="col-sm-12 testimonials section-description wow fadeInUp">
+				<h2>NOTICE</h2>
+			</div>
+		</div>
+
+		<!--    <button type="button" class="btn btn-waring"
+            style="height: 36px; font-size: 14px; line-height: 8px; float: left" data-toggle="modal" data-target="#myModalC">등록</button> -->
+		<div class="wow fadeInUp"
+			style="float: right; margin-bottom: 5px; background: #00000">
+			<button type="button" class="btn btn-info fr"
+				style="height: 36px; margin-left: 5px; font-size: 14px; line-height: 8px;">검색</button>
+			<input class="form-control fr" style="width: 140px"> <select
+				class="form-control fr" style="width: 110px; margin-right: 3px;">
+				<option>작성자</option>
+				<option>타이틀</option>
+				<option>내용</option>
+				<option>내용+작성자</option>
+			</select>
+
+		</div>
+		<table class="table table-bordered wow fadeInUp">
+			<colgroup>
+				<col width="100px">
+				<col width="/">
+				<col width="15%">
+				<col width="15%">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>No.</th>
+					<th>제 목</th>
+					<th>작성일</th>
+					<th>작성자</th>
+				</tr>
+			</thead>
+			<tbody id="listNotice" class="viewnotice">
+
+			</tbody>
+		</table>
+
+
+		<div class="box-footer clearfix">
+			<ul id="paging-comment1"
+				class="pagination pagination-sm no-margin pull-right">
+			</ul>
+		</div>
+	</div>
 <!-- 종열이형 부분 -->
 
 
@@ -688,6 +738,71 @@ html, body {
 		</div>
 	</div>
 </div>
+
+<!--------------------------------------------------------------------->
+	<!---------------------------- QNA Modal Update ----------------------->
+	<!--------------------------------------------------------------------->
+
+	<div class="modal fade" id="myModalnotice" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<!-- modal-lg 팝업크게  -->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Notice View</h4>
+				</div>
+				<div class="modal-body">
+
+					<!-- 팡업 내용 넣는곳  -->
+
+					<table class="table table-bordered ">
+						<colgroup>
+							<col width="20%">
+							<col width="/">
+						</colgroup>
+						<tr>
+							<th>글번호</th>
+							<td class="tl"><input class="form-control nno"
+								readonly="readonly" id="nno"></td>
+						</tr>
+						<tr>
+							<th>날짜</th>
+							<td class="tl"><input class="form-control reg_date"
+								readonly="readonly"></td>
+						</tr>
+						<tr>
+							<th>타이틀</th>
+							<td class="tl"><input class="form-control n_title"
+								readonly="readonly"></td>
+						</tr>
+
+						<tr>
+							<th>아이디</th>
+							<td class="tl"><input class="form-control a_id"
+								readonly="readonly"></td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td><textarea class="form-control n_content"
+									readonly="readonly" value="n_content"></textarea></td>
+						</tr>
+						</tbody>
+					</table>
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<!--                <button type="button" class="btn btn-primary">Save changes</button>
+ -->
+				</div>
+			</div>
+		</div>
+	</div>
 <script type="text/javascript">
 	
 </script>
@@ -1183,6 +1298,92 @@ html, body {
 
 			})
 		});
+		
+		
+		
+		
+		var page1="";
+        var paging1="";
+        var pageMaker1=[];
+		
+       /////////////////////////////////////////////////////////////////////////////////////////          
+		/////////////////////////////////////    NOTICE AJAX 시작       ///////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////// 
+
+		NoticeManager.NoticeList(page1, displaynotice);
+         function displaynotice(data) {
+ 			console.log(data);
+ 				  			
+ 			var listNotice = "";
+ 			var list = data.list1;
+ 			console.log(list);
+
+           pageMaker1=data.pageMaker1;
+           
+           for ( var i = 0; i<list.length; i++){
+           	
+           	listNotice += 
+	            "<tr data-toggle='modal' data-target='#myModalnotice' style='cursor: pointer;'  class='popnotice' data-nno='"+list[i].nno+"' data-title='"+list[i].title+"' data-content='"+list[i].content+"' data-a_id='"+list[i].a_id+"' data-reg_date='"+list[i].reg_date+"'>" +
+           	 "<td class='tc'>" +list[i].nno  + "</td>" +
+           	 "<td>" + list[i].title + "</td>" +
+           	 "<td class='tc'>" + list[i].reg_date + "</td>" +
+           	 "<td class='tc'>" + list[i].a_id + "</td>" +
+                 "</tr>"
+           }
+           
+           $("#listNotice").html(listNotice);
+           //댓글 페이징부분
+			pagingView1();
+		}
+         
+         
+/////////////////////////////////////////////////////////////////////////////////////////          
+////////////////////////////////////NOTICE pageing 시작       /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+
+	function pagingView1(){
+	paging = "";
+	if(pageMaker1.prev) {
+		paging +="<li><a href='"+(pageMaker1.start-1)+"'>◀</a></li>";}
+	for(var i =pageMaker1.start; i<=pageMaker1.end; i++){
+		paging += "<li><a href='"+i+"'>" + i + "</a></li>";
+
+}
+if(pageMaker1.next){
+paging+="<li><a href='" + (pageMaker1.end+1)+ "'>▶</a></li>";
+}
+$("#paging-comment1").html(paging);
+
+}
+$("#paging-comment1").on("click","li a", function(event){
+event.preventDefault();
+	console.log("paging.......................");
+
+var page = $(this).attr("href");
+NoticeManager.NoticeList(page, displaynotice);
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////          
+/////////////////////////////////////   NOTICE VIEW 시작       //////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////         
+
+$(".viewnotice").on("click",".popnotice" ,function(){  //.view 뿌려지느 클래스  .pop 해당 클래스
+$this=$(this);
+nno=$this.attr("data-nno");
+var n_title=$this.attr("data-title");
+var a_id=$this.attr("data-a_id");
+var n_content=$this.attr("data-content");
+var reg_date=$this.attr("data-reg_date");
+
+
+$(".nno").val(nno);
+$(".n_title").val(n_title);
+$(".n_content").val(n_content);
+$(".a_id").val(a_id);
+$(".reg_date").val(reg_date);
+
+});
+
 
 	});
 

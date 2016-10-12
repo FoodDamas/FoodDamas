@@ -1,4 +1,17 @@
-
+.selectLocation{
+   display: none;
+   width:500px;
+   width:500px;
+   background-color: #ffe391;
+   position: absolute;
+   left: 50%;
+   margin-left:-150px;
+   top:50%;
+   margin-top: -110px;
+}
+@media all and (max-width: 500px) {  /* 해상도가 500 이하일때 적용 */
+   .f500 {font-size: 13px !important;}
+}
 body {
 	background: #fff;
     font-family: 'Lato', sans-serif;

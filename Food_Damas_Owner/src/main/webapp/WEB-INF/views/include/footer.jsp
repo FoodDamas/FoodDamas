@@ -44,6 +44,7 @@
 
 <script src="resources/info/info.js"></script>
 <script src="resources/qna/qna.js"></script>
+<script src="resources/notice/notice.js"></script>
 
 <script src="resources/menu/menu.js"></script>
 <!-- 성현 추가 -->

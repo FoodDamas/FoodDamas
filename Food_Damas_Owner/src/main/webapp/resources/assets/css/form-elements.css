@@ -26,7 +26,7 @@ textarea {
 input[type="text"]:focus, 
 textarea:focus {
 	outline: 0;
-    border: 1px solid #f0ad4e;
+    border: 1px solid #8ec1cd;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -38,16 +38,16 @@ input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placehold
 
 
 button.btn {
-	height: 52px;
+	height: 40px;
     margin: 0;
     padding: 0 20px;
     vertical-align: middle;
-    background: #f0ad4e;
+    background: #8ec1cd;
     border: 0;
     font-family: 'Lato', sans-serif;
-    font-size: 22px;
-    font-weight: 400;
-    line-height: 52px;
+/*     font-size: 22px;
+ */    font-weight: 400;
+    line-height: 40px;
     color: #fff;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -85,13 +85,13 @@ button.btn:active {
 button.btn:focus {
 	outline: 0;
 	opacity: 0.6;
-	background: #f0ad4e;
+	background: #8ec1cd;
 	color: #fff;
 }
 
 .btn:focus, .btn:active:focus, .btn.active:focus {
 	outline: 0;
 	opacity: 0.6;
-	background: #f0ad4e;
+	background: #8ec1cd;
 	color: #fff;
 }
