@@ -14,12 +14,11 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="org.mariadb.jdbc.Driver" />
-		<property name="url"
-			value="jdbc:mariadb://fooddamas-db.ctidcwavayxv.ap-northeast-2.rds.amazonaws.com:3306/foodtruck"></property><!-- 
+		<property name="url" value="jdbc:mariadb://14.32.7.115:4446/foodtruck"></property><!-- 
 			database name -->
-		<property name="username" value="fooddamas">
+		<property name="username" value="food">
 		</property><!-- username -->
-		<property name="password" value="fooddamas12">
+		<property name="password" value="food">
 		</property><!-- password -->
 	</bean>
 	<!-- <bean id="dataSourceMariaDB" class="org.springframework.jdbc.datasource.SimpleDriverDataSource"> 

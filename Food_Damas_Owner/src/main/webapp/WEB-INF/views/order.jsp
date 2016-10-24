@@ -112,12 +112,8 @@
 	border: 0;
 	background: transparent;
 }
-.test
-{
-z-index: 1 ;
-}
+
 .searchInput {
-	
 	padding: 0px !important;
 	background: white !important;
 	/*   line-height:22px !important;
@@ -214,7 +210,7 @@ z-index: 1 ;
 
 						<div class="row">
 							<div class="form-group col-xs-6 col-md-3" style="float: right;">
-								<div class="input-group stylish-input-group test">
+								<div class="input-group stylish-input-group">
 
 									<input type="text" class="form-control searchInput"
 										name="searchOrder" placeholder="Search" /> <span

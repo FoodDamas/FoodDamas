@@ -157,6 +157,13 @@ html, body {
 	/*   line-height:22px !important;
 	   height:22px !important; */
 }
+
+#refreshOrder{
+	height: 36px; 
+	margin-left: 5px; 
+	font-size: 14px; 
+	line-height: 8px;
+}
 /* end order */
 </style>
 <!-- Top content -->
@@ -182,94 +189,103 @@ html, body {
 				//localStorage.checkbox ="";
 				var orderModule = new OrderModule(u_id);
 				orderModule.print();
-
+			
 				$("input[name=OpenCloseBtn]").bootstrapSwitch({
 					'size' : 'mini',
 					'onText' : 'Open',
 					'offText' : 'Close',
-					'state' : orderModule.setSwitch()
+					'state':orderModule.setSwitch()
 				});
 				$("input[name=OpenCloseBtn]").on(
 						"switchChange.bootstrapSwitch", function() {
 							var state = this.checked ? 1 : 0;
-
+							
 							orderModule.getPosition(state);
 						});
 				$("input[name=searchOrder]").on("input", function() {
 					orderModule.getData($(this).val());
 				});
-				$("#section1a").on("click", function() {
-					//console.log("click section1a");
-					setTimeout(function() {
-						orderModule.getData();
-					}, 400);
+				$("#refreshOrder").on("click",function(){
+					orderModule.getData();
 				});
-				$("#section2a").on("click", function() {
+				$("#section1a").on("click",function(){
+					//console.log("click section1a");
+					setTimeout(function(){
+						orderModule.getData();
+					},400);
+				});
+				$("#section2a").on("click",function(){
 					//console.log("click section2a");
-					setTimeout(function() {
-						orderModule.orderFinished();
-					}, 200);
+					  setTimeout(function(){							 
+						  orderModule.orderFinished();
+						 },200);  
 				});
 				orderModule.getData();
-
+				 
 			});
 </script>
 <!-- Testimonials -->
 <!-- <div 
 	class="testimonials-container section-container section-container-gray"> -->
-<div class="container" id="order">
-	<div class="row">
-		<div class="col-sm-12 testimonials section-description wow fadeInUp">
-			<h2>Order</h2>
-
-		</div>
-	</div>
-	<!--  <div class="alert alert-warning alert-dismissible" role="alert">
-             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span> <span class="sr-only">Close</span></button>
-            You have <strong> 2</strong> new order. Check It!
-        </div> -->
-	<!--Code Here-->
-	<div class="row">
-		<div>
-			<ul class="nav nav-tabs" id="myTabs" role="tablist">
-				<li class="active"><a id="section1a" role="tab"
-					data-toggle="tab" href="#section1">주문확인</a></li>
-				<li><a id="section2a" role="tab" data-toggle="tab"
-					href="#section2">Finished</a></li>
-				<li style="float: right;"><input type="checkbox"
-					id="open_close" name="OpenCloseBtn" value="On">Food Truck</li>
-			</ul>
-
-			<div class="tab-content">
-
-				<div id="section1" class="tab-pane fade in active">
-					<!-- Order Show -->
-					<div class="row">
-						<div class="form-group col-xs-6 col-md-3" style="float: right;">
-							<div class="input-group stylish-input-group serch">
-
-								<input type="text" class="form-control searchInput"
-									name="searchOrder" placeholder="Search" /> <span
-									class="input-group-addon">
-									<button type="submit">
-										<span class="glyphicon glyphicon-search"></span>
-									</button>
-								</span>
-							</div>
-						</div>
-					</div>
-					<div id="showSection1"></div>
-				</div>
-				<div id="section2" class="tab-pane fade">
-					<div id="showSection2"></div>
-				</div>
+	<div class="container" id="order">
+		<div class="row">
+			<div class="col-sm-12 testimonials section-description wow fadeInUp">
+				<h2>Order</h2>
 
 			</div>
 		</div>
+		<!--  <div class="alert alert-warning alert-dismissible" role="alert">
+             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span> <span class="sr-only">Close</span></button>
+            You have <strong> 2</strong> new order. Check It!
+        </div> -->
+		<!--Code Here-->
+		<div class="row">
+			<div>
+				<ul class="nav nav-tabs" id="myTabs" role="tablist">
+					<li class="active">
+					<a id="section1a" role="tab" data-toggle="tab"
+						href="#section1">주문확인</a></li>
+					<li><a id="section2a" role="tab" data-toggle="tab" href="#section2">Finished</a>
+					</li>
+					<li style="float: right;"><input type="checkbox"
+						id="open_close" name="OpenCloseBtn" value="On">Food Truck
+					</li>
+				</ul>
+
+				<div class="tab-content">
+
+					<div id="section1" class="tab-pane fade in active">
+						<!-- Order Show -->
+						<div class="row">
+							<div class="col-xs-6 col-md-3">
+								<button id="refreshOrder" type="button" class="btn" style="float:left;">Get Order</button>
+							</div>
+							<div class="form-group col-xs-6 col-md-3" style="float: right;">
+							
+								<div class="input-group stylish-input-group">
+
+									<input type="text" class="form-control searchInput"
+										name="searchOrder" placeholder="Search" /> <span
+										class="input-group-addon">
+										<button type="submit">
+											<span class="glyphicon glyphicon-search"></span>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div id="showSection1"></div>
+					</div>
+					<div id="section2" class="tab-pane fade">
+						<div id="showSection2"></div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
 	</div>
-
-
-</div>
 <!-- </div> -->
 <!-- End Order -->
 <!-- 가영이 info -->
